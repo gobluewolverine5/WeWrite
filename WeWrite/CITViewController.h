@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Collabrify/Collabrify.h>
 
-@interface CITViewController : UIViewController
+@interface CITViewController : UIViewController <CollabrifyClientDelegate>
+
+@property (strong, nonatomic) CollabrifyClient *client;
+
+- (void)client:(CollabrifyClient *)client encounteredError:(CollabrifyError *)error;
+- (void)client:(CollabrifyClient *)client receivedEventWithOrderID:(int64_t)orderID submissionRegistrationID:(int32_t)submissionRegistrationID eventType:(NSString *)eventType data:(NSData *)data;
+- (void)client:(CollabrifyClient *)client receivedBaseFile:(NSData *)baseFile;
 
 @end
