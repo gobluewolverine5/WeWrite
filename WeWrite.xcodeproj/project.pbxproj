@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99060805188CEA7200597D14 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 99060804188CEA7200597D14 /* LoginVC.m */; };
+		99060808188CEDA400597D14 /* newSessionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 99060807188CEDA400597D14 /* newSessionVC.m */; };
+		9906080B188CEDC200597D14 /* joinSessionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9906080A188CEDC200597D14 /* joinSessionVC.m */; };
+		9906080E188CF15200597D14 /* documentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9906080D188CF15200597D14 /* documentVC.m */; };
 		99861DE01888DC1100703C63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861DDF1888DC1100703C63 /* Foundation.framework */; };
 		99861DE21888DC1100703C63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861DE11888DC1100703C63 /* CoreGraphics.framework */; };
 		99861DE41888DC1100703C63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861DE31888DC1100703C63 /* UIKit.framework */; };
@@ -26,7 +30,6 @@
 		99861E511888E1CC00703C63 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861E501888E1CC00703C63 /* libc++.dylib */; };
 		99861E531888E1DD00703C63 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861E521888E1DD00703C63 /* SystemConfiguration.framework */; };
 		99861E551888E20D00703C63 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99861E541888E20D00703C63 /* Storyboard.storyboard */; };
-		99861E581888E27400703C63 /* CITViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99861E571888E27400703C63 /* CITViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		99060803188CEA7200597D14 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		99060804188CEA7200597D14 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		99060806188CEDA400597D14 /* newSessionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newSessionVC.h; sourceTree = "<group>"; };
+		99060807188CEDA400597D14 /* newSessionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newSessionVC.m; sourceTree = "<group>"; };
+		99060809188CEDC200597D14 /* joinSessionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = joinSessionVC.h; sourceTree = "<group>"; };
+		9906080A188CEDC200597D14 /* joinSessionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = joinSessionVC.m; sourceTree = "<group>"; };
+		9906080C188CF15200597D14 /* documentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = documentVC.h; sourceTree = "<group>"; };
+		9906080D188CF15200597D14 /* documentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = documentVC.m; sourceTree = "<group>"; };
 		99861DDC1888DC1100703C63 /* WeWrite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeWrite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99861DDF1888DC1100703C63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		99861DE11888DC1100703C63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,8 +123,6 @@
 		99861E501888E1CC00703C63 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		99861E521888E1DD00703C63 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		99861E541888E20D00703C63 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
-		99861E561888E27400703C63 /* CITViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CITViewController.h; sourceTree = "<group>"; };
-		99861E571888E27400703C63 /* CITViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CITViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,8 +197,14 @@
 				99861E541888E20D00703C63 /* Storyboard.storyboard */,
 				99861DF11888DC1100703C63 /* Images.xcassets */,
 				99861DE61888DC1100703C63 /* Supporting Files */,
-				99861E561888E27400703C63 /* CITViewController.h */,
-				99861E571888E27400703C63 /* CITViewController.m */,
+				99060803188CEA7200597D14 /* LoginVC.h */,
+				99060804188CEA7200597D14 /* LoginVC.m */,
+				99060806188CEDA400597D14 /* newSessionVC.h */,
+				99060807188CEDA400597D14 /* newSessionVC.m */,
+				99060809188CEDC200597D14 /* joinSessionVC.h */,
+				9906080A188CEDC200597D14 /* joinSessionVC.m */,
+				9906080C188CF15200597D14 /* documentVC.h */,
+				9906080D188CF15200597D14 /* documentVC.m */,
 			);
 			path = WeWrite;
 			sourceTree = "<group>";
@@ -442,8 +457,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9906080E188CF15200597D14 /* documentVC.m in Sources */,
+				99060808188CEDA400597D14 /* newSessionVC.m in Sources */,
+				9906080B188CEDC200597D14 /* joinSessionVC.m in Sources */,
 				99861DF01888DC1100703C63 /* AppDelegate.m in Sources */,
-				99861E581888E27400703C63 /* CITViewController.m in Sources */,
+				99060805188CEA7200597D14 /* LoginVC.m in Sources */,
 				99861DEC1888DC1100703C63 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +689,7 @@
 				99861E0A1888DC1100703C63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		99861E0B1888DC1100703C63 /* Build configuration list for PBXNativeTarget "WeWriteTests" */ = {
 			isa = XCConfigurationList;
@@ -679,6 +698,7 @@
 				99861E0D1888DC1100703C63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
