@@ -1,0 +1,14 @@
+package msgStruct;
+
+enum msgType {
+    ADD = 0;
+    DELETE = 1;
+    UNDO = 2;
+    REDO = 3;
+}
+
+message TextMsg {
+    required msgType type = 1 [default = ADD];
+    optional string message = 2;
+    required double longitude = 3;
+}

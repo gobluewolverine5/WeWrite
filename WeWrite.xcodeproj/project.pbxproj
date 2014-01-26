@@ -30,6 +30,9 @@
 		99861E511888E1CC00703C63 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861E501888E1CC00703C63 /* libc++.dylib */; };
 		99861E531888E1DD00703C63 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99861E521888E1DD00703C63 /* SystemConfiguration.framework */; };
 		99861E551888E20D00703C63 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99861E541888E20D00703C63 /* Storyboard.storyboard */; };
+		998FBB971895A6D300324BA8 /* deque.m in Sources */ = {isa = PBXBuildFile; fileRef = 998FBB961895A6D300324BA8 /* deque.m */; };
+		998FBB9A1895AD4500324BA8 /* eventElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 998FBB991895AD4500324BA8 /* eventElement.m */; };
+		99C328D018905296006F9CA8 /* msgStruct.proto in Resources */ = {isa = PBXBuildFile; fileRef = 99C328CF18905296006F9CA8 /* msgStruct.proto */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,11 @@
 		99861E501888E1CC00703C63 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		99861E521888E1DD00703C63 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		99861E541888E20D00703C63 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		998FBB951895A6D300324BA8 /* deque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deque.h; sourceTree = "<group>"; };
+		998FBB961895A6D300324BA8 /* deque.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deque.m; sourceTree = "<group>"; };
+		998FBB981895AD4500324BA8 /* eventElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventElement.h; sourceTree = "<group>"; };
+		998FBB991895AD4500324BA8 /* eventElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventElement.m; sourceTree = "<group>"; };
+		99C328CF18905296006F9CA8 /* msgStruct.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = msgStruct.proto; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +213,11 @@
 				9906080A188CEDC200597D14 /* joinSessionVC.m */,
 				9906080C188CF15200597D14 /* documentVC.h */,
 				9906080D188CF15200597D14 /* documentVC.m */,
+				99C328CF18905296006F9CA8 /* msgStruct.proto */,
+				998FBB951895A6D300324BA8 /* deque.h */,
+				998FBB961895A6D300324BA8 /* deque.m */,
+				998FBB981895AD4500324BA8 /* eventElement.h */,
+				998FBB991895AD4500324BA8 /* eventElement.m */,
 			);
 			path = WeWrite;
 			sourceTree = "<group>";
@@ -437,6 +450,7 @@
 				99861E4E1888DCD700703C63 /* plugin.proto in Resources */,
 				99861E4F1888DCD700703C63 /* descriptor.proto in Resources */,
 				99861DEA1888DC1100703C63 /* InfoPlist.strings in Resources */,
+				99C328D018905296006F9CA8 /* msgStruct.proto in Resources */,
 				99861DF21888DC1100703C63 /* Images.xcassets in Resources */,
 				99861E551888E20D00703C63 /* Storyboard.storyboard in Resources */,
 			);
@@ -462,7 +476,9 @@
 				9906080B188CEDC200597D14 /* joinSessionVC.m in Sources */,
 				99861DF01888DC1100703C63 /* AppDelegate.m in Sources */,
 				99060805188CEA7200597D14 /* LoginVC.m in Sources */,
+				998FBB9A1895AD4500324BA8 /* eventElement.m in Sources */,
 				99861DEC1888DC1100703C63 /* main.m in Sources */,
+				998FBB971895A6D300324BA8 /* deque.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

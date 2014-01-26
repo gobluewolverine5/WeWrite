@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <Collabrify/Collabrify.h>
 
-@interface documentVC : UIViewController <UITextViewDelegate, CollabrifyClientDelegate>
+struct event {
+    int loc;
+    __unsafe_unretained NSMutableString *string;
+    
+};
+@interface documentVC : UIViewController <UITextViewDelegate, CollabrifyClientDelegate> {
+    
+    NSTimer *track_timer;
+}
 
 
 @property (strong, nonatomic) IBOutlet UITextView *textbox;
@@ -20,4 +28,7 @@
 - (IBAction)leaveSession:(id)sender;
 - (IBAction)redo:(id)sender;
 - (IBAction)undo:(id)sender;
+- (IBAction)moveRight:(id)sender;
+- (IBAction)moveLeft:(id)sender;
+
 @end
