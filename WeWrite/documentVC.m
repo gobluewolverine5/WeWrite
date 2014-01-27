@@ -108,16 +108,12 @@
     NSString *parameter_string = @"";
     parameter_string = [[textView text] stringByAppendingString:text];
     
-    location =  [textView offsetFromPosition:0
-                                  toPosition:textView.selectedTextRange.start];
-   
     //NSLog(@"location: %i", location);
-    
     
     // Inserting Operation
     if (![text isEqualToString:@""]) {
         if (!inserted) {
-            [self pushEvent:buffer cursorLocation:location typeEvent:inserted];
+            [self pushEvent:buffer typeEvent:inserted];
         }
         [buffer appendString:text];
         inserted = TRUE;
@@ -125,7 +121,7 @@
     // Delete Operation
     else {
         if (inserted) {
-            [self pushEvent:buffer cursorLocation:location typeEvent:inserted];
+            [self pushEvent:buffer typeEvent:inserted];
         }
         [buffer insertString:[[textView text] substringWithRange:range] atIndex:0];
         inserted = FALSE;
@@ -203,7 +199,7 @@
 - (void) addEvent
 {
     
-    [self pushEvent:buffer cursorLocation:location typeEvent:inserted];
+    [self pushEvent:buffer typeEvent:inserted];
     NSLog(@"Auto add event called");
 }
 
@@ -222,31 +218,51 @@
 }
 
 - (IBAction)redo:(id)sender {
-    //[myUndoManager redo];
+   
+    //Return if there is nothing to redo
+    if ([localRedoEvents size] == 0) return;
+    
+    eventElement *temp = [localRedoEvents popFront];
+    [self eventHandle:temp];
+    [localUndoEvents pushFront:temp];
 }
 
 - (IBAction)undo:(id)sender {
-    //[myUndoManager undo];
-    if ([localUndoEvents size] == 0) {
-        return;
-    }
+    
+    //Return if there is nothing to undo
+    if ([localUndoEvents size] == 0) return;
+    
     eventElement *temp = [localUndoEvents popFront];
-    NSLog(@"location: %i", [temp getLocation]);
+    [self eventHandle:temp];
+    [localRedoEvents pushFront:temp];
+}
+
+- (void) eventHandle:(eventElement*)event
+{
+    NSLog(@"location: %i", [event getLocation]);
     NSLog(@"size of undo stack: %i", [localUndoEvents size]);
-    if (temp.insert) {
+    
+    //Reverting Insert Event
+    if (event.insert) {
         NSRange tempRange;
         
         // +1 to fix location
-        tempRange.location = [temp getLocation] - [temp.string length] + 1;
-        tempRange.length = [temp.string length];
+        tempRange.location = [event getLocation] - [event.string length];
+        tempRange.length = [event.string length];
         [textbox setText:[textbox.text stringByReplacingCharactersInRange:tempRange withString:@""]];
-    } else {
-        NSRange tempRange;
-        tempRange.location = [temp getLocation];
-        tempRange.length = [temp.string length];
-        [self insertString:temp.string insertRange:tempRange];
+       
+        [event updateLocation:tempRange.location];
     }
-    [localRedoEvents pushFront:temp];
+    //Reverting Delete Event
+    else {
+        NSRange tempRange;
+        tempRange.location = [event getLocation];
+        tempRange.length = [event.string length];
+        [self insertString:event.string insertRange:tempRange];
+        
+        [event updateLocation:(tempRange.location + tempRange.length)];
+    }
+    event.insert = !event.insert;
 }
 
 - (IBAction)moveRight:(id)sender {
@@ -255,7 +271,7 @@
                                      toPosition:textbox.selectedTextRange.start];
     textbox.selectedRange = NSMakeRange(location, 0);
     
-    [self pushEvent:buffer cursorLocation:location typeEvent:inserted];
+    [self pushEvent:buffer typeEvent:inserted];
 }
 
 - (IBAction)moveLeft:(id)sender {
@@ -264,19 +280,23 @@
         location = -1 + [textbox offsetFromPosition:0
                                      toPosition:textbox.selectedTextRange.start];
         
-        [self pushEvent:buffer cursorLocation:location typeEvent:inserted];
+        [self pushEvent:buffer typeEvent:inserted];
         
     }
     textbox.selectedRange = NSMakeRange(location, 0);
 }
 
-- (void) pushEvent:(NSMutableString*)string cursorLocation:(int)loc typeEvent:(BOOL)type
+- (void) pushEvent:(NSMutableString*)string typeEvent:(BOOL)type
 {
+    [self stopTimer];
+    location =  [textbox offsetFromPosition:0
+                                  toPosition:textbox.selectedTextRange.start];
+    
     // broadcast message and obtain registration id
     if (![buffer isEqualToString:@""]) {
         eventElement *temp = [[eventElement alloc] init];
         [temp setString:[NSMutableString stringWithFormat:@"%@", buffer]];
-        [temp updateLocation:loc];
+        [temp updateLocation:location];
         [temp setInsert:type];
         
         if ([localUndoEvents size] > 20) [localUndoEvents popBack];
@@ -284,21 +304,42 @@
         
         [buffer setString:@""];
     }
+    [self startTimer];
 }
 
 - (void) insertString:(NSString *)insertingString insertRange:(NSRange)range
 {
-    NSString * firstHalfString = [textbox.text substringToIndex:range.location];
-    NSString * secondHalfString = [textbox.text substringFromIndex: range.location];
+    
     textbox.scrollEnabled = NO;  // turn off scrolling or you'll get dizzy ... I promise
-    
-    textbox.text = [NSString stringWithFormat: @"%@%@%@",
-                     firstHalfString,
-                     insertingString,
-                     secondHalfString];
-    range.location += [insertingString length];
-    textbox.selectedRange = range;
+    if ([textbox.text length] == 0) {
+        [textbox setText:[NSString stringWithFormat:@"%@", insertingString]];
+    } else {
+        
+        NSString * firstHalfString = [textbox.text substringToIndex:range.location];
+        NSString * secondHalfString = [textbox.text substringFromIndex: range.location];
+       
+        textbox.text = [NSString stringWithFormat: @"%@%@%@",
+                         firstHalfString,
+                         insertingString,
+                         secondHalfString];
+        range.location += [insertingString length];
+        textbox.selectedRange = range;
+    }
     textbox.scrollEnabled = YES;  // turn scrolling back on.
-    
+}
+
+- (void) stopTimer
+{
+    [track_timer invalidate];
+    track_timer = Nil;
+}
+
+- (void) startTimer
+{
+    track_timer = [NSTimer scheduledTimerWithTimeInterval:2
+                                                   target:self
+                                                 selector:@selector(addEvent)
+                                                 userInfo:Nil
+                                                  repeats:YES];
 }
 @end
