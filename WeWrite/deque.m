@@ -57,5 +57,9 @@
     return [array count];
 }
 
+- (id) frontElement
+{
+    return [array lastObject];
+}
 
 @end

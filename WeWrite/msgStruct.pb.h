@@ -120,7 +120,7 @@ class TextMsg : public ::google::protobuf::Message {
   inline ::msgStruct::msgType type() const;
   inline void set_type(::msgStruct::msgType value);
 
-  // optional string message = 2;
+  // required string message = 2;
   inline bool has_message() const;
   inline void clear_message();
   static const int kMessageFieldNumber = 2;
@@ -132,12 +132,12 @@ class TextMsg : public ::google::protobuf::Message {
   inline ::std::string* release_message();
   inline void set_allocated_message(::std::string* message);
 
-  // required double longitude = 3;
-  inline bool has_longitude() const;
-  inline void clear_longitude();
-  static const int kLongitudeFieldNumber = 3;
-  inline double longitude() const;
-  inline void set_longitude(double value);
+  // required double cursor = 3;
+  inline bool has_cursor() const;
+  inline void clear_cursor();
+  static const int kCursorFieldNumber = 3;
+  inline double cursor() const;
+  inline void set_cursor(double value);
 
   // @@protoc_insertion_point(class_scope:msgStruct.TextMsg)
  private:
@@ -145,13 +145,13 @@ class TextMsg : public ::google::protobuf::Message {
   inline void clear_has_type();
   inline void set_has_message();
   inline void clear_has_message();
-  inline void set_has_longitude();
-  inline void clear_has_longitude();
+  inline void set_has_cursor();
+  inline void clear_has_cursor();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* message_;
-  double longitude_;
+  double cursor_;
   int type_;
 
   mutable int _cached_size_;
@@ -194,7 +194,7 @@ inline void TextMsg::set_type(::msgStruct::msgType value) {
   type_ = value;
 }
 
-// optional string message = 2;
+// required string message = 2;
 inline bool TextMsg::has_message() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -264,26 +264,26 @@ inline void TextMsg::set_allocated_message(::std::string* message) {
   }
 }
 
-// required double longitude = 3;
-inline bool TextMsg::has_longitude() const {
+// required double cursor = 3;
+inline bool TextMsg::has_cursor() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void TextMsg::set_has_longitude() {
+inline void TextMsg::set_has_cursor() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void TextMsg::clear_has_longitude() {
+inline void TextMsg::clear_has_cursor() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void TextMsg::clear_longitude() {
-  longitude_ = 0;
-  clear_has_longitude();
+inline void TextMsg::clear_cursor() {
+  cursor_ = 0;
+  clear_has_cursor();
 }
-inline double TextMsg::longitude() const {
-  return longitude_;
+inline double TextMsg::cursor() const {
+  return cursor_;
 }
-inline void TextMsg::set_longitude(double value) {
-  set_has_longitude();
-  longitude_ = value;
+inline void TextMsg::set_cursor(double value) {
+  set_has_cursor();
+  cursor_ = value;
 }
 
 

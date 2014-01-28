@@ -9,6 +9,6 @@ enum msgType {
 
 message TextMsg {
     required msgType type = 1 [default = ADD];
-    optional string message = 2;
-    required double longitude = 3;
+    required string message = 2;
+    required double cursor = 3;
 }

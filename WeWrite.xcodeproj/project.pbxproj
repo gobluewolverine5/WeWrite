@@ -32,6 +32,8 @@
 		99861E551888E20D00703C63 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99861E541888E20D00703C63 /* Storyboard.storyboard */; };
 		998FBB971895A6D300324BA8 /* deque.m in Sources */ = {isa = PBXBuildFile; fileRef = 998FBB961895A6D300324BA8 /* deque.m */; };
 		998FBB9A1895AD4500324BA8 /* eventElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 998FBB991895AD4500324BA8 /* eventElement.m */; };
+		99969AA818984ED0007AC192 /* eventMessage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 99969AA718984ED0007AC192 /* eventMessage.mm */; };
+		99969AAA1898511C007AC192 /* msgStruct.pb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99969AA91898511C007AC192 /* msgStruct.pb.cpp */; };
 		99C328D018905296006F9CA8 /* msgStruct.proto in Resources */ = {isa = PBXBuildFile; fileRef = 99C328CF18905296006F9CA8 /* msgStruct.proto */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,10 @@
 		998FBB961895A6D300324BA8 /* deque.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deque.m; sourceTree = "<group>"; };
 		998FBB981895AD4500324BA8 /* eventElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventElement.h; sourceTree = "<group>"; };
 		998FBB991895AD4500324BA8 /* eventElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventElement.m; sourceTree = "<group>"; };
+		99969AA318984C87007AC192 /* msgStruct.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msgStruct.pb.h; sourceTree = "<group>"; };
+		99969AA618984ED0007AC192 /* eventMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventMessage.h; sourceTree = "<group>"; };
+		99969AA718984ED0007AC192 /* eventMessage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = eventMessage.mm; sourceTree = "<group>"; };
+		99969AA91898511C007AC192 /* msgStruct.pb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msgStruct.pb.cpp; sourceTree = "<group>"; };
 		99C328CF18905296006F9CA8 /* msgStruct.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = msgStruct.proto; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +206,7 @@
 		99861DE51888DC1100703C63 /* WeWrite */ = {
 			isa = PBXGroup;
 			children = (
+				99969AA218984C6D007AC192 /* WeWrite Proto Buffers */,
 				99861DEE1888DC1100703C63 /* AppDelegate.h */,
 				99861DEF1888DC1100703C63 /* AppDelegate.m */,
 				99861E541888E20D00703C63 /* Storyboard.storyboard */,
@@ -213,7 +220,6 @@
 				9906080A188CEDC200597D14 /* joinSessionVC.m */,
 				9906080C188CF15200597D14 /* documentVC.h */,
 				9906080D188CF15200597D14 /* documentVC.m */,
-				99C328CF18905296006F9CA8 /* msgStruct.proto */,
 				998FBB951895A6D300324BA8 /* deque.h */,
 				998FBB961895A6D300324BA8 /* deque.m */,
 				998FBB981895AD4500324BA8 /* eventElement.h */,
@@ -372,6 +378,18 @@
 			path = stubs;
 			sourceTree = "<group>";
 		};
+		99969AA218984C6D007AC192 /* WeWrite Proto Buffers */ = {
+			isa = PBXGroup;
+			children = (
+				99969AA91898511C007AC192 /* msgStruct.pb.cpp */,
+				99969AA318984C87007AC192 /* msgStruct.pb.h */,
+				99969AA618984ED0007AC192 /* eventMessage.h */,
+				99969AA718984ED0007AC192 /* eventMessage.mm */,
+				99C328CF18905296006F9CA8 /* msgStruct.proto */,
+			);
+			name = "WeWrite Proto Buffers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99969AA818984ED0007AC192 /* eventMessage.mm in Sources */,
 				9906080E188CF15200597D14 /* documentVC.m in Sources */,
 				99060808188CEDA400597D14 /* newSessionVC.m in Sources */,
 				9906080B188CEDC200597D14 /* joinSessionVC.m in Sources */,
@@ -478,6 +497,7 @@
 				99060805188CEA7200597D14 /* LoginVC.m in Sources */,
 				998FBB9A1895AD4500324BA8 /* eventElement.m in Sources */,
 				99861DEC1888DC1100703C63 /* main.m in Sources */,
+				99969AAA1898511C007AC192 /* msgStruct.pb.cpp in Sources */,
 				998FBB971895A6D300324BA8 /* deque.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

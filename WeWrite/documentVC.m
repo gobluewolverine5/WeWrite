@@ -9,6 +9,7 @@
 #import "documentVC.h"
 #import "deque.h"
 #import "eventElement.h"
+#import "eventMessage.h"
 
 @interface documentVC ()
 
@@ -22,6 +23,7 @@
     deque *localUndoEvents;
     deque *localRedoEvents;
     BOOL inserted;
+    eventMessage *event_message;
 }
 
 @synthesize textbox;
@@ -46,10 +48,8 @@
    
     NSLog(@"documentVC Loaded");
    
-    /*
     [client setDelegate:self];
     [self setClient:client];
-     */
     
     textbox.delegate = self;
     textbox.text = @"";
@@ -70,6 +70,8 @@
     localUndoEvents = [[deque alloc] init];
     localRedoEvents = [[deque alloc] init];
     inserted = TRUE;
+    
+    event_message = [[eventMessage alloc] init];
     
 }
 
@@ -159,11 +161,6 @@
     }
 }
 
-- (void)client:(CollabrifyClient *)client receivedEventWithOrderID:(int64_t)orderID submissionRegistrationID:(int32_t)submissionRegistrationID eventType:(NSString *)eventType data:(NSData *)data
-{
-    
-}
-
 - (void)client:(CollabrifyClient *)client receivedBaseFile:(NSData *)baseFile
 {
     
@@ -194,14 +191,37 @@
 {
     NSLog(@"Participant %@ has left", participant.displayName);
 }
+
+- (int) broadcastEvent:(NSString*)message typeEvent:(BOOL)type cursorLocation:(int)loc
+{
+    NSData *send_data =[event_message formEvent:((type)? 0:1)
+                                      eventText:message
+                                    eventCursor:(double)loc];
+    int registration_id = [[self client] broadcast:send_data eventType:@"eventMessage"];
+    NSLog(@"Sent Message with registration id: %i", registration_id);
+    return registration_id;
+}
+
+#pragma Client Retrieve Data
+- (void)client:(CollabrifyClient *)client receivedEventWithOrderID:(int64_t)orderID submissionRegistrationID:(int32_t)submissionRegistrationID eventType:(NSString *)eventType data:(NSData *)data
+{
+    NSMutableDictionary *received_data = [event_message retrieveEvent:data];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //[[self statusLabel] setText:chatMessage];
+        NSLog(@"order_id %lli", orderID);
+        NSLog(@"registration id: %i", submissionRegistrationID);
+        NSLog(@"received_data: %@", received_data);
+        
+        
+    });
+}
+
+
 /************* End Client Code Block ************/
 
-- (void) addEvent
-{
-    
-    [self pushEvent:buffer typeEvent:inserted];
-    NSLog(@"Auto add event called");
-}
+
+/************* IBAction Code ****************/
 
 - (IBAction)leaveSession:(id)sender {
     
@@ -237,33 +257,7 @@
     [localRedoEvents pushFront:temp];
 }
 
-- (void) eventHandle:(eventElement*)event
-{
-    NSLog(@"location: %i", [event getLocation]);
-    NSLog(@"size of undo stack: %i", [localUndoEvents size]);
-    
-    //Reverting Insert Event
-    if (event.insert) {
-        NSRange tempRange;
-        
-        // +1 to fix location
-        tempRange.location = [event getLocation] - [event.string length];
-        tempRange.length = [event.string length];
-        [textbox setText:[textbox.text stringByReplacingCharactersInRange:tempRange withString:@""]];
-       
-        [event updateLocation:tempRange.location];
-    }
-    //Reverting Delete Event
-    else {
-        NSRange tempRange;
-        tempRange.location = [event getLocation];
-        tempRange.length = [event.string length];
-        [self insertString:event.string insertRange:tempRange];
-        
-        [event updateLocation:(tempRange.location + tempRange.length)];
-    }
-    event.insert = !event.insert;
-}
+
 
 - (IBAction)moveRight:(id)sender {
    
@@ -286,6 +280,8 @@
     textbox.selectedRange = NSMakeRange(location, 0);
 }
 
+/************* End IBAction Code ****************/
+
 - (void) pushEvent:(NSMutableString*)string typeEvent:(BOOL)type
 {
     [self stopTimer];
@@ -294,11 +290,18 @@
     
     // broadcast message and obtain registration id
     if (![buffer isEqualToString:@""]) {
+        
+        int reg_id = [self broadcastEvent:[NSString stringWithFormat:@"%@", buffer]
+                   typeEvent:type
+              cursorLocation:location];
+        
         eventElement *temp = [[eventElement alloc] init];
         [temp setString:[NSMutableString stringWithFormat:@"%@", buffer]];
         [temp updateLocation:location];
         [temp setInsert:type];
-        
+        [temp setSubmission_id:reg_id];
+        [temp setOrder_id:-1];
+       
         if ([localUndoEvents size] > 20) [localUndoEvents popBack];
         [localUndoEvents pushFront:temp];
         
@@ -328,6 +331,39 @@
     textbox.scrollEnabled = YES;  // turn scrolling back on.
 }
 
+- (void) eventHandle:(eventElement*)event
+{
+    NSLog(@"location: %i", [event getLocation]);
+    NSLog(@"size of undo stack: %i", [localUndoEvents size]);
+    
+    //Reverting Insert Event
+    if (event.insert) {
+        NSRange tempRange;
+        
+        // +1 to fix location
+        tempRange.location = [event getLocation] - [event.string length];
+        tempRange.length = [event.string length];
+        [textbox setText:[textbox.text stringByReplacingCharactersInRange:tempRange withString:@""]];
+        
+        [event updateLocation:tempRange.location];
+    }
+    //Reverting Delete Event
+    else {
+        NSRange tempRange;
+        tempRange.location = [event getLocation];
+        tempRange.length = [event.string length];
+        [self insertString:event.string insertRange:tempRange];
+        
+        [event updateLocation:(tempRange.location + tempRange.length)];
+    }
+    event.insert = !event.insert;
+}
+
+
+
+
+/**************** Start Timer Code *****************/
+
 - (void) stopTimer
 {
     [track_timer invalidate];
@@ -342,4 +378,13 @@
                                                  userInfo:Nil
                                                   repeats:YES];
 }
+
+- (void) addEvent
+{
+    [self pushEvent:buffer typeEvent:inserted];
+    //NSLog(@"Auto add event called");
+}
+
+/**************************************************/
+
 @end

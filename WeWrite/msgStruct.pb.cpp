@@ -38,7 +38,7 @@ void protobuf_AssignDesc_msgStruct_2eproto() {
   static const int TextMsg_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TextMsg, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TextMsg, message_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TextMsg, longitude_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TextMsg, cursor_),
   };
   TextMsg_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -82,11 +82,11 @@ void protobuf_AddDesc_msgStruct_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\017msgStruct.proto\022\tmsgStruct\"T\n\007TextMsg\022"
+    "\n\017msgStruct.proto\022\tmsgStruct\"Q\n\007TextMsg\022"
     "%\n\004type\030\001 \002(\0162\022.msgStruct.msgType:\003ADD\022\017"
-    "\n\007message\030\002 \001(\t\022\021\n\tlongitude\030\003 \002(\001*2\n\007ms"
-    "gType\022\007\n\003ADD\020\000\022\n\n\006DELETE\020\001\022\010\n\004UNDO\020\002\022\010\n\004"
-    "REDO\020\003", 166);
+    "\n\007message\030\002 \002(\t\022\016\n\006cursor\030\003 \002(\001*2\n\007msgTy"
+    "pe\022\007\n\003ADD\020\000\022\n\n\006DELETE\020\001\022\010\n\004UNDO\020\002\022\010\n\004RED"
+    "O\020\003", 163);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "msgStruct.proto", &protobuf_RegisterTypes);
   TextMsg::default_instance_ = new TextMsg();
@@ -122,7 +122,7 @@ bool msgType_IsValid(int value) {
 #ifndef _MSC_VER
 const int TextMsg::kTypeFieldNumber;
 const int TextMsg::kMessageFieldNumber;
-const int TextMsg::kLongitudeFieldNumber;
+const int TextMsg::kCursorFieldNumber;
 #endif  // !_MSC_VER
 
 TextMsg::TextMsg()
@@ -143,7 +143,7 @@ void TextMsg::SharedCtor() {
   _cached_size_ = 0;
   type_ = 0;
   message_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  longitude_ = 0;
+  cursor_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -188,7 +188,7 @@ void TextMsg::Clear() {
         message_->clear();
       }
     }
-    longitude_ = 0;
+    cursor_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -220,7 +220,7 @@ bool TextMsg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string message = 2;
+      // required string message = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -233,19 +233,19 @@ bool TextMsg::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(25)) goto parse_longitude;
+        if (input->ExpectTag(25)) goto parse_cursor;
         break;
       }
 
-      // required double longitude = 3;
+      // required double cursor = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
-         parse_longitude:
+         parse_cursor:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &longitude_)));
-          set_has_longitude();
+                 input, &cursor_)));
+          set_has_cursor();
         } else {
           goto handle_uninterpreted;
         }
@@ -277,7 +277,7 @@ void TextMsg::SerializeWithCachedSizes(
       1, this->type(), output);
   }
 
-  // optional string message = 2;
+  // required string message = 2;
   if (has_message()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->message().data(), this->message().length(),
@@ -286,9 +286,9 @@ void TextMsg::SerializeWithCachedSizes(
       2, this->message(), output);
   }
 
-  // required double longitude = 3;
-  if (has_longitude()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->longitude(), output);
+  // required double cursor = 3;
+  if (has_cursor()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->cursor(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -305,7 +305,7 @@ void TextMsg::SerializeWithCachedSizes(
       1, this->type(), target);
   }
 
-  // optional string message = 2;
+  // required string message = 2;
   if (has_message()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->message().data(), this->message().length(),
@@ -315,9 +315,9 @@ void TextMsg::SerializeWithCachedSizes(
         2, this->message(), target);
   }
 
-  // required double longitude = 3;
-  if (has_longitude()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->longitude(), target);
+  // required double cursor = 3;
+  if (has_cursor()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->cursor(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -337,15 +337,15 @@ int TextMsg::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // optional string message = 2;
+    // required string message = 2;
     if (has_message()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->message());
     }
 
-    // required double longitude = 3;
-    if (has_longitude()) {
+    // required double cursor = 3;
+    if (has_cursor()) {
       total_size += 1 + 8;
     }
 
@@ -382,8 +382,8 @@ void TextMsg::MergeFrom(const TextMsg& from) {
     if (from.has_message()) {
       set_message(from.message());
     }
-    if (from.has_longitude()) {
-      set_longitude(from.longitude());
+    if (from.has_cursor()) {
+      set_cursor(from.cursor());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -402,7 +402,7 @@ void TextMsg::CopyFrom(const TextMsg& from) {
 }
 
 bool TextMsg::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000005) != 0x00000005) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -411,7 +411,7 @@ void TextMsg::Swap(TextMsg* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(message_, other->message_);
-    std::swap(longitude_, other->longitude_);
+    std::swap(cursor_, other->cursor_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

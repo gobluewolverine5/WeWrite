@@ -15,5 +15,6 @@
 - (id) popBack;
 - (void) pushBack:(id)element;
 - (int) size;
+- (id) frontElement;
 
 @end
